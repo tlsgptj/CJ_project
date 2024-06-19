@@ -16,4 +16,13 @@
         tools:layout_editor_absoluteX="84dp"
         tools:layout_editor_absoluteY="104dp" />
 
+    <TextView
+        android:id="@+id/heartbeat"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="104dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your heartBeat is"
+        tools:ignore="MissingConstraints" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
