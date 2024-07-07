@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-<<<<<<< HEAD
     alias(libs.plugins.google.gms.google.services)
 }
 
@@ -16,24 +15,9 @@ android {
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-=======
-}
-
-android {
-    namespace = "com.example.cj_project"
-    compileSdk = 34
-
-    defaultConfig {
-        applicationId = "com.example.cj_project"
-        minSdk = 30
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
         vectorDrawables {
             useSupportLibrary = true
         }
-
->>>>>>> 52e9fafd3688eabded528af7e7ec237102bc87b3
     }
 
     buildTypes {
@@ -53,33 +37,7 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures {
-<<<<<<< HEAD
         viewBinding = true
-    }
-}
-
-// app-level build.gradle
-dependencies {
-//    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
-  //  implementation("com.samsung.android.sdk.health:health-data:1.4.0")
-    //implementation("com.samsung.android.sdk:health:1.2.5")
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.annotation)
-    implementation(libs.androidx.lifecycle.livedata.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.firebase.database)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-}
-
-
-
-=======
         compose = true
     }
     composeOptions {
@@ -93,6 +51,18 @@ dependencies {
 }
 
 dependencies {
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.annotation)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.firebase.database)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(libs.play.services.wearable)
     implementation(platform(libs.compose.bom))
@@ -107,13 +77,8 @@ dependencies {
     implementation(libs.horologist.compose.tools)
     implementation(libs.horologist.tiles)
     implementation(libs.watchface.complications.data.source.ktx)
-    implementation(libs.appcompat)
-    implementation(libs.material)
-    implementation(libs.activity)
-    implementation(libs.constraintlayout)
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ui.test.junit4)
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
 }
->>>>>>> 52e9fafd3688eabded528af7e7ec237102bc87b3
