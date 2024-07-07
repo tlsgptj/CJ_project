@@ -14,7 +14,7 @@
         android:layout_marginLeft="100dp"
         android:layout_width="200dp"
         android:layout_height="80dp"
-        android:src="@mipmap/Group5"/>
+        android:src="@drawable/Group5"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -28,11 +28,19 @@
     <Button
         android:layout_width="251dp"
         android:layout_height="40dp"
-        android:layout_marginTop="600dp"
-        android:layout_marginLeft="150dp"
+        android:layout_marginTop="390dp"
+        android:layout_marginLeft="70dp"
         android:textSize="15dp"
         android:background="#006ECD"
         android:text="일반회원" />
 
+    <Button
+        android:layout_width="251dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="460dp"
+        android:layout_marginLeft="70dp"
+        android:textSize="15dp"
+        android:background="#006ECD"
+        android:text="관리자회원" />
 
 </FrameLayout>
