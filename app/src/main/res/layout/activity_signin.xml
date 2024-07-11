@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="#D9D9D9"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".signin">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/group5"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="140dp"/>
+
+    <TextView
+        android:id="@+id/아이디"
+        android:text="아이디"
+        android:textColor="@color/black"
+        android:layout_marginLeft="30dp"
+        android:textSize="18dp"
+        android:layout_marginTop="140dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="160dp"
+        android:textColorHint="#ACADB9"
+        android:hint="4~12 글자 영어와 숫자 조합"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비밀번호"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="210dp"
+        android:textColor="@color/black"
+        android:textSize="18dp"/>
+
+    <EditText
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="240dp"
+        android:textColorHint="#ACADB9"
+        android:hint="8글자 이상, 영문, 숫자, 특수문자"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="300dp"
+        android:text="중복검사"
+        android:textSize="14dp"
+        android:background="#006ECD"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비밀번호 재확인"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="290dp"
+        android:textColor="@color/black"
+        android:textSize="18dp"/>
+
+    <EditText
+        android:layout_width="362dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="320dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비밀번호가 일치합니다"
+        android:visibility="visible"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="370dp"
+        android:textColor="#006ECD"
+        android:textSize="18dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="성함"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="400dp"/>
+
+    <EditText
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="420dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="480dp"
+        android:layout_marginLeft="120dp"
+        android:text="성별"/>
+
+    <RadioGroup
+        android:id="@+id/Gender"
+        android:layout_marginTop="480dp"
+        android:layout_marginLeft="170dp"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/male"
+            android:textSize="18dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="@color/black"
+            android:text="남성"/>
+
+        <RadioButton
+            android:id="@+id/female"
+            android:textSize="18dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="@color/black"
+            android:text="여성"/>
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="전화번호"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="520dp"/>
+
+    <EditText
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:hint="숫자만 입력하세요"
+        android:textSize="18dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="550dp"
+        android:textColorHint="#ACADB9"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이메일"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="600dp"/>
+
+    <EditText
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="630dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="확인"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="680dp"
+        android:background="#006ECD"/>
+
+
+
+</FrameLayout>

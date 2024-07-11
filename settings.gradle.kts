@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "cj_project_app"
 include(":app")
 
+
