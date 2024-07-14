@@ -29,6 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="오늘 통계"
+        android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:layout_marginLeft="30dp"
@@ -51,6 +52,7 @@
         android:layout_height="wrap_content"
         android:text="일주일 통계"
         android:textColor="@color/black"
+        android:textStyle="bold"
         android:textSize="20dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="450dp"/>
@@ -59,16 +61,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="통계 평가"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="720dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="700dp"
+        android:textStyle="bold"
         android:textSize="20dp"
         android:textColor="@color/black"/>
 
     <TextView
         android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="750dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginTop="730dp"
+        android:layout_marginLeft="35dp"
         android:textSize="20dp"
         android:textColor="@color/black"
         android:text="다음 주 근무 중 자주 휴식을 취하시길 바랍니다."/>
@@ -85,7 +88,7 @@
         android:id="@+id/chartPic"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:background="@drawable/chartPic"
+        android:background="@drawable/chartpic"
         android:layout_marginLeft="190dp"
         android:layout_marginTop="825dp"/>
 

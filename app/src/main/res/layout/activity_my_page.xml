@@ -14,14 +14,14 @@
         android:layout_height="wrap_content"
         android:text="사용자"
         android:layout_marginTop="260dp"
-        android:layout_marginLeft="195dp"
+        android:layout_marginLeft="155dp"
         android:textColor="@color/black"
         android:textSize="30dp"/>
 
     <ImageView
         android:layout_width="70dp"
         android:layout_height="90dp"
-        android:layout_marginLeft="200dp"
+        android:layout_marginLeft="165dp"
         android:layout_marginTop="150dp"
         android:background="@drawable/people"/>
 
@@ -105,11 +105,12 @@
         android:id="@+id/chartPic"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:background="@drawable/chartPic"
+        android:background="@drawable/chartpic"
         android:layout_marginLeft="190dp"
         android:layout_marginTop="825dp"/>
 
     <Button
+        android:id="@+id/my_page_go"
         android:layout_width="35dp"
         android:layout_height="40dp"
         android:layout_marginTop="825dp"

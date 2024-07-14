@@ -195,7 +195,7 @@
         android:id="@+id/chartPic"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:background="@drawable/chartPic"
+        android:background="@drawable/chartpic"
         android:layout_marginLeft="190dp"
         android:layout_marginTop="825dp"/>
 

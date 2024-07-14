@@ -6,6 +6,73 @@
     android:background="#F5F5F5"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="110dp"
+        android:background="@drawable/group5"/>
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:hint="아이디"
+        android:textColorHint="#ACADB9"
+        android:layout_marginTop="330dp"
+        android:layout_marginLeft="60dp"/>
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:hint="비밀번호"
+        android:textColorHint="#ACADB9"
+        android:layout_marginTop="400dp"
+        android:layout_marginLeft="60dp"/>
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="520dp"
+        android:layout_marginLeft="60dp"
+        android:text="로그인"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:background="#006ECD"/>
+
+    <Button
+        android:id="@+id/find_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="아이디 찾기"
+        android:textSize="15dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="460dp"
+        android:textColor="#ACADB9"
+        android:background="#ffffffff"/>
+
+    <Button
+        android:id="@+id/find_pw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비밀번호 찾기"
+        android:textSize="15dp"
+        android:layout_marginLeft="165dp"
+        android:layout_marginTop="460dp"
+        android:textColor="#ACADB9"
+        android:background="#ffffffff"/>
+
+    <Button
+        android:id="@+id/sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="회원 가입"
+        android:textSize="15dp"
+        android:layout_marginLeft="270dp"
+        android:layout_marginTop="460dp"
+        android:textColor="#ACADB9"
+        android:background="#ffffffff"/>
 
     <Button
         android:id="@+id/finger_button"
@@ -13,8 +80,9 @@
         android:layout_height="wrap_content"
         android:textColor="#006ECD"
         android:background="#F5F5F5"
-        android:layout_marginTop="500dp"
-        android:layout_marginLeft="150dp"
+        android:textStyle="bold"
+        android:layout_marginTop="600dp"
+        android:layout_marginLeft="160dp"
         android:text="생체 로그인 >"/>
 
 </FrameLayout>
