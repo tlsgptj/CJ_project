@@ -13,6 +13,14 @@
         android:supportsRtl="true"
         android:theme="@android:style/Theme.DeviceDefault">
         <activity
+            android:name=".fingerprint_login"
+            android:exported="false"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
+        <activity
+            android:name=".call_119"
+            android:exported="false"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
+        <activity
             android:name=".my_page"
             android:exported="false"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />

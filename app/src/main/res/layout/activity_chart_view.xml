@@ -3,13 +3,98 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:background="#FFFFFFFF"
+    android:background="#F7F8FA"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".chart_view">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:text="심장 박동수 통계"
+        android:textSize="30dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="100dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="65dp"
+        android:background="@drawable/heart"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="오늘 통계"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="200dp"/>
+
+    <com.github.mikephil.charting.charts.CombinedChart
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginLeft="30dp"/>
+
+    <com.github.mikephil.charting.charts.CombinedChart
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="490dp"
+        android:layout_marginLeft="30dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="일주일 통계"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="450dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="통계 평가"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="720dp"
+        android:textSize="20dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="750dp"
+        android:layout_marginLeft="30dp"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:text="다음 주 근무 중 자주 휴식을 취하시길 바랍니다."/>
+
+    <Button
+        android:id="@+id/home"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/home"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="825dp"/>
+
+    <Button
+        android:id="@+id/chartPic"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/chartPic"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="825dp"/>
+
+    <Button
+        android:layout_width="35dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="825dp"
+        android:layout_marginLeft="300dp"
+        android:background="@drawable/people"/>
+
 
 </FrameLayout>
