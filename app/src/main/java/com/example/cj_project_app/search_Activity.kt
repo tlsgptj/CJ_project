@@ -5,17 +5,13 @@ import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.github.mikephil.charting.charts.CombinedChart
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.fitness.Fitness
-import com.google.android.gms.fitness.data.DataType
-import com.google.android.gms.fitness.data.Field
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.fitness.FitnessOptions
-import java.util.concurrent.TimeUnit
+import com.google.android.gms.fitness.data.DataType
 
 class search_Activity : AppCompatActivity() {
 
@@ -40,7 +36,57 @@ class search_Activity : AppCompatActivity() {
         heartChart
         initChart()
         writeHeartRateDataAndPlot(70f, System.currentTimeMillis(), System.currentTimeMillis())
+
+        // ProgressBar 초기화
+        progressBar.setProgress(0)
+
+
+        // 진행 상태 업데이트 (예: 50% 진행)
+        progressBar.setProgress(50)
+
+
+        // 특정 시간 동안 진행 상태 업데이트
+        Thread {
+            var progress = 0
+            while (progress <= 100) {
+                val currentProgress = progress
+                runOnUiThread { progressBar.setProgress(currentProgress) }
+                try {
+                    Thread.sleep(500) // 0.5초 지연
+                } catch (e: InterruptedException) {
+                    e.printStackTrace()
+                }
+                progress += 10
+            }
+        }.start()
+
+
+        // ProgressBar 초기화
+        stressBar.setProgress(0)
+
+
+// 진행 상태 업데이트 (예: 50% 진행)
+        stressBar.setProgress(50)
+
+
+// 특정 시간 동안 진행 상태 업데이트
+        Thread {
+            var progress = 0
+            while (progress <= 100) {
+                val currentProgress = progress
+                runOnUiThread { stressBar.setProgress(currentProgress) }
+                try {
+                    Thread.sleep(500) // 0.5초 지연
+                } catch (e: InterruptedException) {
+                    e.printStackTrace()
+                }
+                progress += 10
+            }
+        }.start()
+
+
     }
+
 
     private fun initChart() {
         heartChart.setTouchEnabled(true)
