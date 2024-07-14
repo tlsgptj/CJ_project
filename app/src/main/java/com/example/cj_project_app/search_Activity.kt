@@ -1,7 +1,11 @@
 
 package com.example.cj_project_app
 import android.os.Bundle
+import android.widget.Button
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.github.mikephil.charting.charts.CombinedChart
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.fitness.Fitness
 import com.google.android.gms.fitness.data.DataType
@@ -15,7 +19,17 @@ import java.util.concurrent.TimeUnit
 
 class search_Activity : AppCompatActivity() {
 
-    private lateinit var chart: LineChart
+    val call119Button: Button = findViewById(R.id.call_119)
+    val helpButton: Button = findViewById(R.id.help)
+    val homeButton: Button = findViewById(R.id.home)
+    val chartPicButton: Button = findViewById(R.id.chartPic)
+    val personButton: Button = findViewById(R.id.person)
+
+    val workHoursTextView: TextView = findViewById(R.id.work_hours)
+    val minuteTextView: TextView = findViewById(R.id.minute)
+    val heartChart: LineChart = findViewById(R.id.heart_chart)
+    val progressBar: ProgressBar = findViewById(R.id.progressBar)
+    val stressBar: ProgressBar = findViewById(R.id.stress_bar)
     private val entries = mutableListOf<Entry>()
     private lateinit var dataSet: LineDataSet
 
@@ -23,25 +37,21 @@ class search_Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // 차트 초기화
-        chart = findViewById(R.id.heart_chart)
+        heartChart
         initChart()
-        // 예시: 심박수 데이터 쓰기 및 차트 업데이트
-        // 실제 데이터와 시간 범위를 적절히 설정하여 사용하세요
         writeHeartRateDataAndPlot(70f, System.currentTimeMillis(), System.currentTimeMillis())
     }
 
-    // 차트 초기화 함수
     private fun initChart() {
-        chart.setTouchEnabled(true)
-        chart.setPinchZoom(true)
+        heartChart.setTouchEnabled(true)
+        heartChart.setPinchZoom(true)
 
         // 차트 데이터 초기화
         dataSet = LineDataSet(entries, "Heart Rate (bpm)")
         dataSet.setDrawValues(false) // 값 표시 안 함
-        val lineData = LineData(dataSet)
-        chart.data = lineData
-        chart.invalidate() // 차트 갱신
+        val CombinedChart = LineData(dataSet)
+        heartChart.data = CombinedChart
+        heartChart.invalidate() // 차트 갱신
     }
 
     // 심박수 데이터를 기록하고 차트를 실시간으로 업데이트하는 함수
@@ -52,7 +62,7 @@ class search_Activity : AppCompatActivity() {
 
         val account = GoogleSignIn.getAccountForExtension(this, fitnessOptions)
 
-        val dataSet = Fitness.getRecordingClient(this, account)
+        /*val dataSet = Fitness.getRecordingClient(this, account)
             .addData(dataSet)
             .addOnSuccessListener {
                 // 데이터 업데이트 성공 시 차트 업데이트
@@ -60,7 +70,7 @@ class search_Activity : AppCompatActivity() {
             }
             .addOnFailureListener { exception ->
                 // 데이터 업데이트 실패 시 처리
-            }
+            }*/
     }
 
     // 차트를 실시간으로 업데이트하는 함수
@@ -68,7 +78,7 @@ class search_Activity : AppCompatActivity() {
         val currentTime = System.currentTimeMillis()
         entries.add(Entry(currentTime.toFloat(), heartRate))
         dataSet.notifyDataSetChanged() // 데이터셋 변경 알림
-        chart.notifyDataSetChanged() // 차트 변경 알림
-        chart.invalidate() // 차트 갱신
+        heartChart.notifyDataSetChanged() // 차트 변경 알림
+        heartChart.invalidate() // 차트 갱신
     }
 }

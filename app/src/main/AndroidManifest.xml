@@ -38,9 +38,6 @@
             android:name=".search_Activity"
             android:exported="true" />
         <activity
-            android:name=".successSign"
-            android:exported="true" />
-        <activity
             android:name=".signin"
             android:exported="true" />
         <activity

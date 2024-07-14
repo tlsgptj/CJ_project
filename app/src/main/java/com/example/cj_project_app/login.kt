@@ -10,7 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import java.util.concurrent.Executor
 
-class fingerprint_login : AppCompatActivity() {
+class login : AppCompatActivity() {
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var prompt: BiometricPrompt.PromptInfo
     private lateinit var executor: Executor
