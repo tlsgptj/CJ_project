@@ -51,6 +51,8 @@ android {
 }
 
 dependencies {
+    implementation ("com.google.android.material:material:1.4.0")
+    implementation ("androidx.biometric:biometric-ktx:1.2.0-alpha04")
     implementation ("com.google.android.gms:play-services-auth:20.0.0")
     implementation ("com.google.android.gms:play-services-fitness:20.0.0")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")

@@ -4,6 +4,8 @@
     package="com.example.cj_project_app">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
     <application
         android:allowBackup="true"
@@ -13,20 +15,20 @@
         android:supportsRtl="true"
         android:theme="@android:style/Theme.DeviceDefault">
         <activity
-            android:name=".fingerprint_login"
-            android:exported="false"
+            android:name=".login"
+            android:exported="true"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
         <activity
             android:name=".call_119"
-            android:exported="false"
+            android:exported="true"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
         <activity
             android:name=".my_page"
-            android:exported="false"
+            android:exported="true"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
         <activity
             android:name=".chart_view"
-            android:exported="false"
+            android:exported="true"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
         <activity
             android:name=".search_Activity"

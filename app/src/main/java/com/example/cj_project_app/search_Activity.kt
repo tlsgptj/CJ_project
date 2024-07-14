@@ -24,7 +24,7 @@ class search_Activity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // 차트 초기화
-        chart = findViewById(R.id.chart)
+        chart = findViewById(R.id.heart_chart)
         initChart()
         // 예시: 심박수 데이터 쓰기 및 차트 업데이트
         // 실제 데이터와 시간 범위를 적절히 설정하여 사용하세요
