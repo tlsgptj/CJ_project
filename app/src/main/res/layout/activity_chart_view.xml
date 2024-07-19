@@ -36,12 +36,14 @@
         android:layout_marginTop="200dp"/>
 
     <com.github.mikephil.charting.charts.CombinedChart
+        android:id="@+id/today"
         android:layout_width="350dp"
         android:layout_height="200dp"
         android:layout_marginTop="240dp"
         android:layout_marginLeft="30dp"/>
 
     <com.github.mikephil.charting.charts.CombinedChart
+        android:id="@+id/weekly"
         android:layout_width="350dp"
         android:layout_height="200dp"
         android:layout_marginTop="490dp"

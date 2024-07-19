@@ -38,7 +38,7 @@
         android:layout_height="40dp"
         android:layout_marginLeft="220dp"
         android:layout_marginTop="200dp"
-        android:background="@drawable/Vector"/>
+        android:background="@drawable/vector"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -122,10 +122,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="m"
+        android:visibility="invisible"
         android:textSize="20dp"
         android:textColor="@color/black"
         android:layout_marginLeft="110dp"
         android:layout_marginTop="545dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="h"
+        android:visibility="invisible"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="545dp"/>
+
 
     <Button
         android:id="@+id/call_119"
@@ -195,7 +208,7 @@
         android:id="@+id/chartPic"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:background="@drawable/chartPic"
+        android:background="@drawable/chartpic"
         android:layout_marginLeft="190dp"
         android:layout_marginTop="825dp"/>
 

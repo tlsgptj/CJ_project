@@ -5,8 +5,7 @@
     android:id="@+id/main"
     android:background="#F5F5F5"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".my_page">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/name"
@@ -36,24 +35,28 @@
         android:layout_marginTop="320dp"/>
 
     <Button
+        android:id="@+id/editProfile"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="350dp"
         android:text="프로필 수정"/>
 
     <Button
+        android:id="@+id/change_password"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="400dp"
         android:text="비밀번호 변경"/>
 
     <Button
+        android:id="@+id/push_notifications"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="450dp"
         android:text="푸시 알람 설정"/>
 
     <Button
+        android:id="@+id/view_reports"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="500dp"
@@ -70,24 +73,28 @@
         android:textStyle="bold"/>
 
     <Button
+        android:id="@+id/notice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="공지 사항"
         android:layout_marginTop="590dp"/>
 
     <Button
+        android:id="@+id/inquiry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="1 : 1 문의"
         android:layout_marginTop="640dp"/>
 
     <Button
+        android:id="@+id/customer_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="고객 센터"
         android:layout_marginTop="690dp"/>
 
     <Button
+        android:id="@+id/settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="환경설정"

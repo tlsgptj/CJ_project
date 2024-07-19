@@ -1,106 +1,152 @@
 
 package com.example.cj_project_app
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.fitness.Fitness
 import com.google.android.gms.fitness.FitnessOptions
 import com.google.android.gms.fitness.data.DataType
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class search_Activity : AppCompatActivity() {
 
-    val call119Button: Button = findViewById(R.id.call_119)
-    val helpButton: Button = findViewById(R.id.help)
-    val homeButton: Button = findViewById(R.id.home)
-    val chartPicButton: Button = findViewById(R.id.chartPic)
-    val personButton: Button = findViewById(R.id.person)
+    private val CALL_PHONE_PERMISSION_REQUEST_CODE = 1
 
-    val workHoursTextView: TextView = findViewById(R.id.work_hours)
-    val minuteTextView: TextView = findViewById(R.id.minute)
-    val heartChart: LineChart = findViewById(R.id.heart_chart)
-    val progressBar: ProgressBar = findViewById(R.id.progressBar)
-    val stressBar: ProgressBar = findViewById(R.id.stress_bar)
+    private lateinit var call119Button: Button
+    private lateinit var helpButton: Button
+    private lateinit var homeButton: Button
+    private lateinit var chartPicButton: Button
+    private lateinit var personButton: Button
+    private lateinit var workHoursTextView: TextView
+    private lateinit var minuteTextView: TextView
+    private lateinit var heartChart: LineChart
+    private lateinit var progressBar: ProgressBar
+    private lateinit var stressBar: ProgressBar
     private val entries = mutableListOf<Entry>()
     private lateinit var dataSet: LineDataSet
+    //데이터 베이스 정의
+    private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_search)
 
-        heartChart
+        call119Button = findViewById(R.id.call_119)
+        helpButton = findViewById(R.id.help)
+        homeButton = findViewById(R.id.home)
+        chartPicButton = findViewById(R.id.chartPic)
+        personButton = findViewById(R.id.person)
+        workHoursTextView = findViewById(R.id.work_hours)
+        minuteTextView = findViewById(R.id.minute)
+        heartChart = findViewById(R.id.heart_chart)
+        progressBar = findViewById(R.id.progressBar)
+        stressBar = findViewById(R.id.stress_bar)
+        dataSet = LineDataSet(entries, "Heart Rate")
+        heartChart.data = LineData(dataSet)
+        //데이터 베이스 가져오기
+        database = FirebaseDatabase.getInstance().getReference("heartRate")
+
+        call119Button.setOnClickListener {
+            makePhoneCall("119")
+        }
+        helpButton.setOnClickListener {
+            //관리자에게 신고하는 트랙
+            if (::adminPhoneNumber.isInitialized) {
+                makePhoneCall(adminPhoneNumber)
+            } else {
+                Toast.makeText(this, "관리자 정보를 불러오는 중입니다. 잠시 후 다시 시도하세요.", Toast.LENGTH_SHORT).show()
+            }
+            loadAdminInfoFromFirebase()
+        }
+        private fun loadAdminInfoFromFirebase() {
+            val database = FirebaseDatabase.getInstance()
+            val adminRef = database.getReference("admin")
+
+            adminRef.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    adminPhoneNumber = snapshot.child("phone").getValue(String::class.java) ?: ""
+                    adminEmailAddress = snapshot.child("email").getValue(String::class.java) ?: ""
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(this@MainActivity, "관리자 정보를 불러오는 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+
+        private fun makePhoneCall(phoneNumber: String) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CALL_PHONE), CALL_PHONE_PERMISSION_REQUEST_CODE)
+            } else {
+                startPhoneCall(phoneNumber)
+            }
+        }
+
         initChart()
         writeHeartRateDataAndPlot(70f, System.currentTimeMillis(), System.currentTimeMillis())
 
-        // ProgressBar 초기화
-        progressBar.setProgress(0)
-
-
-        // 진행 상태 업데이트 (예: 50% 진행)
-        progressBar.setProgress(50)
-
-
-        // 특정 시간 동안 진행 상태 업데이트
-        Thread {
-            var progress = 0
-            while (progress <= 100) {
-                val currentProgress = progress
-                runOnUiThread { progressBar.setProgress(currentProgress) }
-                try {
-                    Thread.sleep(500) // 0.5초 지연
-                } catch (e: InterruptedException) {
-                    e.printStackTrace()
-                }
-                progress += 10
-            }
-        }.start()
-
-
-        // ProgressBar 초기화
-        stressBar.setProgress(0)
-
-
-// 진행 상태 업데이트 (예: 50% 진행)
-        stressBar.setProgress(50)
-
-
-// 특정 시간 동안 진행 상태 업데이트
-        Thread {
-            var progress = 0
-            while (progress <= 100) {
-                val currentProgress = progress
-                runOnUiThread { stressBar.setProgress(currentProgress) }
-                try {
-                    Thread.sleep(500) // 0.5초 지연
-                } catch (e: InterruptedException) {
-                    e.printStackTrace()
-                }
-                progress += 10
-            }
-        }.start()
-
-
+        updateProgressBar(progressBar)
+        updateProgressBar(stressBar)
     }
 
+    private fun makePhoneCall(phoneNumber: String) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CALL_PHONE), CALL_PHONE_PERMISSION_REQUEST_CODE)
+        } else {
+            startPhoneCall(phoneNumber)
+        }
+    }
+
+    private fun startPhoneCall(phoneNumber: String) {
+        val callIntent = Intent(Intent.ACTION_CALL)
+        callIntent.data = Uri.parse("tel:$phoneNumber")
+        try {
+            startActivity(callIntent)
+        } catch (e: SecurityException) {
+            e.printStackTrace()
+            Toast.makeText(this, "전화 걸기 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == CALL_PHONE_PERMISSION_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                makePhoneCall("119")
+            } else {
+                Toast.makeText(this, "전화 걸기 권한이 거부되었습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
     private fun initChart() {
         heartChart.setTouchEnabled(true)
         heartChart.setPinchZoom(true)
 
-        // 차트 데이터 초기화
         dataSet = LineDataSet(entries, "Heart Rate (bpm)")
-        dataSet.setDrawValues(false) // 값 표시 안 함
-        val CombinedChart = LineData(dataSet)
-        heartChart.data = CombinedChart
-        heartChart.invalidate() // 차트 갱신
+        dataSet.setDrawValues(false)
+        val lineData = LineData(dataSet)
+        heartChart.data = lineData
+        heartChart.invalidate()
     }
 
-    // 심박수 데이터를 기록하고 차트를 실시간으로 업데이트하는 함수
     private fun writeHeartRateDataAndPlot(heartRate: Float, startTimeMillis: Long, endTimeMillis: Long) {
         val fitnessOptions = FitnessOptions.builder()
             .addDataType(DataType.TYPE_HEART_RATE_BPM, FitnessOptions.ACCESS_WRITE)
@@ -108,23 +154,40 @@ class search_Activity : AppCompatActivity() {
 
         val account = GoogleSignIn.getAccountForExtension(this, fitnessOptions)
 
-        /*val dataSet = Fitness.getRecordingClient(this, account)
-            .addData(dataSet)
-            .addOnSuccessListener {
-                // 데이터 업데이트 성공 시 차트 업데이트
-                updateChart(heartRate)
-            }
-            .addOnFailureListener { exception ->
-                // 데이터 업데이트 실패 시 처리
-            }*/
+        val task = Fitness.getRecordingClient(this, account)
+            .subscribe(DataType.TYPE_HEART_RATE_BPM)
+
+        task.addOnSuccessListener {
+            updateChart(heartRate)
+        }.addOnFailureListener { exception ->
+            exception.printStackTrace()
+        }
     }
 
-    // 차트를 실시간으로 업데이트하는 함수
     private fun updateChart(heartRate: Float) {
         val currentTime = System.currentTimeMillis()
         entries.add(Entry(currentTime.toFloat(), heartRate))
-        dataSet.notifyDataSetChanged() // 데이터셋 변경 알림
-        heartChart.notifyDataSetChanged() // 차트 변경 알림
-        heartChart.invalidate() // 차트 갱신
+        dataSet.notifyDataSetChanged()
+        heartChart.notifyDataSetChanged()
+        heartChart.invalidate()
     }
+
+    private fun updateProgressBar(progressBar: ProgressBar) {
+        progressBar.progress = 0
+
+        Thread {
+            var progress = 0
+            while (progress <= 100) {
+                val currentProgress = progress
+                runOnUiThread { progressBar.progress = currentProgress }
+                try {
+                    Thread.sleep(500)
+                } catch (e: InterruptedException) {
+                    e.printStackTrace()
+                }
+                progress += 10
+            }
+        }.start()
+    }
+
 }
