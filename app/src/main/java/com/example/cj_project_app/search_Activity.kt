@@ -26,7 +26,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class SearchActivity : AppCompatActivity() {
+class search_Activity : AppCompatActivity() {
 
     private val CALL_PHONE_PERMISSION_REQUEST_CODE = 1
     private lateinit var adminPhoneNumber: String
@@ -42,9 +42,10 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var heartChart: LineChart
     private lateinit var progressBar: ProgressBar
     private lateinit var stressBar: ProgressBar
-    private val entries = mutableListOf<Entry>()
-    private lateinit var dataSet: LineDataSet
+    private val heartEntries = mutableListOf<Entry>()
+    private lateinit var heartDataSet: LineDataSet
     private lateinit var database: DatabaseReference
+    private lateinit var stressDatabase: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,10 +62,11 @@ class SearchActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressBar)
         stressBar = findViewById(R.id.stress_bar)
 
-        dataSet = LineDataSet(entries, "Heart Rate")
-        heartChart.data = LineData(dataSet)
+        heartDataSet = LineDataSet(heartEntries, "Heart Rate")
+        heartChart.data = LineData(heartDataSet)
 
         database = FirebaseDatabase.getInstance().getReference("heartRate")
+        stressDatabase = FirebaseDatabase.getInstance().getReference("stressLevel")
 
         call119Button.setOnClickListener {
             makePhoneCall("119")
@@ -80,9 +82,7 @@ class SearchActivity : AppCompatActivity() {
         }
 
         initChart()
-        writeHeartRateDataAndPlot(70f, System.currentTimeMillis(), System.currentTimeMillis())
-        updateProgressBar(progressBar)
-        updateProgressBar(stressBar)
+        setupRealtimeDatabaseListeners()
     }
 
     private fun loadAdminInfoFromFirebase() {
@@ -95,7 +95,7 @@ class SearchActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@SearchActivity, "관리자 정보를 불러오는 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@search_Activity, "관리자 정보를 불러오는 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -134,54 +134,57 @@ class SearchActivity : AppCompatActivity() {
         heartChart.setTouchEnabled(true)
         heartChart.setPinchZoom(true)
 
-        dataSet = LineDataSet(entries, "Heart Rate (bpm)")
-        dataSet.setDrawValues(false)
-        val lineData = LineData(dataSet)
-        heartChart.data = lineData
+        heartDataSet.setDrawValues(false)
+        val heartLineData = LineData(heartDataSet)
+        heartChart.data = heartLineData
         heartChart.invalidate()
     }
 
-    private fun writeHeartRateDataAndPlot(heartRate: Float, startTimeMillis: Long, endTimeMillis: Long) {
-        val fitnessOptions = FitnessOptions.builder()
-            .addDataType(DataType.TYPE_HEART_RATE_BPM, FitnessOptions.ACCESS_WRITE)
-            .build()
+    private fun setupRealtimeDatabaseListeners() {
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                heartEntries.clear()
 
-        val account = GoogleSignIn.getAccountForExtension(this, fitnessOptions)
+                for (data in snapshot.children) {
+                    val heartRate = data.child("heartRate").getValue(Float::class.java) ?: 0f
+                    val timestamp = data.child("timestamp").getValue(Long::class.java) ?: System.currentTimeMillis()
+                    heartEntries.add(Entry(timestamp.toFloat(), heartRate))
+                }
 
-        val task = Fitness.getRecordingClient(this, account)
-            .subscribe(DataType.TYPE_HEART_RATE_BPM)
+                heartDataSet.notifyDataSetChanged()
+                heartChart.notifyDataSetChanged()
+                heartChart.invalidate()
+            }
 
-        task.addOnSuccessListener {
-            updateChart(heartRate)
-        }.addOnFailureListener { exception ->
-            exception.printStackTrace()
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@search_Activity, "심박수 데이터를 가져오는 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        stressDatabase.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var stressLevel = 0f
+
+                for (data in snapshot.children) {
+                    stressLevel = data.child("stressLevel").getValue(Float::class.java) ?: 0f
+                }
+
+                updateStressProgressBar(stressLevel)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@search_Activity, "스트레스 데이터를 가져오는 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun updateStressProgressBar(stressLevel: Float) {
+        val progress = (stressLevel.coerceIn(0f, 100f)).toInt()
+        runOnUiThread {
+            stressBar.progress = progress
         }
     }
-
-    private fun updateChart(heartRate: Float) {
-        val currentTime = System.currentTimeMillis()
-        entries.add(Entry(currentTime.toFloat(), heartRate))
-        dataSet.notifyDataSetChanged()
-        heartChart.notifyDataSetChanged()
-        heartChart.invalidate()
-    }
-
-    private fun updateProgressBar(progressBar: ProgressBar) {
-        progressBar.progress = 0
-
-        Thread {
-            var progress = 0
-            while (progress <= 100) {
-                val currentProgress = progress
-                runOnUiThread { progressBar.progress = currentProgress }
-                try {
-                    Thread.sleep(500)
-                } catch (e: InterruptedException) {
-                    e.printStackTrace()
-                }
-                progress += 10
-            }
-        }.start()
-    }
 }
+
+
 
