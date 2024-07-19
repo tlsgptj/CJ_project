@@ -32,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         fingerButton.setOnClickListener {
-            val intent = Intent(this, search_Activity::class.java)
+            val intent = Intent(this, fingerprint_signin::class.java)
             startActivity(intent)
         }
     }
@@ -53,7 +53,7 @@ class LoginActivity : AppCompatActivity() {
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
             Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-            // 로그인 성공 후 다음 화면으로 이동
+            val intent = Intent(this, search_Activity::class.java)
         } else {
             Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
         }
