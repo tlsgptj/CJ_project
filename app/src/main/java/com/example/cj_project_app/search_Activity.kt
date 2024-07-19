@@ -1,5 +1,6 @@
-
 package com.example.cj_project_app
+
+import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -25,9 +26,11 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class search_Activity : AppCompatActivity() {
+class SearchActivity : AppCompatActivity() {
 
     private val CALL_PHONE_PERMISSION_REQUEST_CODE = 1
+    private lateinit var adminPhoneNumber: String
+    private lateinit var adminEmailAddress: String
 
     private lateinit var call119Button: Button
     private lateinit var helpButton: Button
@@ -41,7 +44,6 @@ class search_Activity : AppCompatActivity() {
     private lateinit var stressBar: ProgressBar
     private val entries = mutableListOf<Entry>()
     private lateinit var dataSet: LineDataSet
-    //데이터 베이스 정의
     private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,52 +60,44 @@ class search_Activity : AppCompatActivity() {
         heartChart = findViewById(R.id.heart_chart)
         progressBar = findViewById(R.id.progressBar)
         stressBar = findViewById(R.id.stress_bar)
+
         dataSet = LineDataSet(entries, "Heart Rate")
         heartChart.data = LineData(dataSet)
-        //데이터 베이스 가져오기
+
         database = FirebaseDatabase.getInstance().getReference("heartRate")
 
         call119Button.setOnClickListener {
             makePhoneCall("119")
         }
+
         helpButton.setOnClickListener {
-            //관리자에게 신고하는 트랙
             if (::adminPhoneNumber.isInitialized) {
                 makePhoneCall(adminPhoneNumber)
             } else {
                 Toast.makeText(this, "관리자 정보를 불러오는 중입니다. 잠시 후 다시 시도하세요.", Toast.LENGTH_SHORT).show()
-            }
-            loadAdminInfoFromFirebase()
-        }
-        private fun loadAdminInfoFromFirebase() {
-            val database = FirebaseDatabase.getInstance()
-            val adminRef = database.getReference("admin")
-
-            adminRef.addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    adminPhoneNumber = snapshot.child("phone").getValue(String::class.java) ?: ""
-                    adminEmailAddress = snapshot.child("email").getValue(String::class.java) ?: ""
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(this@MainActivity, "관리자 정보를 불러오는 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
-                }
-            })
-        }
-
-        private fun makePhoneCall(phoneNumber: String) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CALL_PHONE), CALL_PHONE_PERMISSION_REQUEST_CODE)
-            } else {
-                startPhoneCall(phoneNumber)
+                loadAdminInfoFromFirebase()
             }
         }
 
         initChart()
         writeHeartRateDataAndPlot(70f, System.currentTimeMillis(), System.currentTimeMillis())
-
         updateProgressBar(progressBar)
         updateProgressBar(stressBar)
+    }
+
+    private fun loadAdminInfoFromFirebase() {
+        val adminRef = FirebaseDatabase.getInstance().getReference("admin")
+
+        adminRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                adminPhoneNumber = snapshot.child("phone").getValue(String::class.java) ?: ""
+                adminEmailAddress = snapshot.child("email").getValue(String::class.java) ?: ""
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@SearchActivity, "관리자 정보를 불러오는 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun makePhoneCall(phoneNumber: String) {
@@ -189,5 +183,5 @@ class search_Activity : AppCompatActivity() {
             }
         }.start()
     }
-
 }
+
