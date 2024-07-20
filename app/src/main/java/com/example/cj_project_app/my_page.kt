@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -49,7 +50,8 @@ class my_page : AppCompatActivity() {
 
         // 버튼 클릭 리스너 설정
         editProfileButton.setOnClickListener {
-            Toast.makeText(this, "프로필 수정 클릭됨", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, myPageProfile::class.java)
+            startActivity(intent)
         }
         changePasswordButton.setOnClickListener {
             Toast.makeText(this, "비밀번호 변경 클릭됨", Toast.LENGTH_SHORT).show()
@@ -58,7 +60,8 @@ class my_page : AppCompatActivity() {
             Toast.makeText(this, "푸시 알람 설정 클릭됨", Toast.LENGTH_SHORT).show()
         }
         viewReportsButton.setOnClickListener {
-            Toast.makeText(this, "신고 내역 조회 클릭됨", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, call_119::class.java)
+            startActivity(intent)
         }
         noticeButton.setOnClickListener {
             Toast.makeText(this, "공지 사항 클릭됨", Toast.LENGTH_SHORT).show()

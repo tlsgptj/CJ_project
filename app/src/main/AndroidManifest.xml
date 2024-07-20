@@ -20,8 +20,12 @@
         android:supportsRtl="true"
         android:theme="@android:style/Theme.DeviceDefault">
         <activity
-            android:name=".reportHistory"
+            android:name=".myPageProfile"
             android:exported="false"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
+        <activity
+            android:name=".call_119"
+            android:exported="true"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
         <activity
             android:name=".fingerprint_signin"
@@ -29,10 +33,6 @@
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
         <activity
             android:name=".login"
-            android:exported="true"
-            android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
-        <activity
-            android:name=".call_119"
             android:exported="true"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
         <activity
