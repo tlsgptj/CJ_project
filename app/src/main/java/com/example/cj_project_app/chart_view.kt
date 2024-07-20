@@ -16,7 +16,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class MainActivity : AppCompatActivity() {
+class chart_view : AppCompatActivity() {
 
     private lateinit var dailyChart: CombinedChart
     private lateinit var weeklyChart: CombinedChart
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@MainActivity, "Failed to load heart rate data.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@chart_view, "Failed to load heart rate data.", Toast.LENGTH_SHORT).show()
             }
         })
     }

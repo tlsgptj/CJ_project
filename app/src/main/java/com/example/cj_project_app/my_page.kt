@@ -11,7 +11,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class MyPageActivity : AppCompatActivity() {
+class my_page : AppCompatActivity() {
 
     private lateinit var nameTextView: TextView
     private lateinit var editProfileButton: Button
@@ -93,12 +93,12 @@ class MyPageActivity : AppCompatActivity() {
                 name?.let {
                     nameTextView.text = it
                 } ?: run {
-                    Toast.makeText(this@MyPageActivity, "사용자 정보를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@my_page, "사용자 정보를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@MyPageActivity, "데이터베이스 오류: ${error.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@my_page, "데이터베이스 오류: ${error.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
