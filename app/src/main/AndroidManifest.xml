@@ -19,6 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.DeviceDefault">
+
         <activity
             android:name=".myPageProfile"
             android:exported="false"
@@ -31,10 +32,17 @@
             android:name=".fingerprint_signin"
             android:exported="false"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
+
         <activity
             android:name=".login"
             android:exported="true"
-            android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".my_page"
             android:exported="true"
@@ -50,11 +58,6 @@
             android:name=".signin"
             android:exported="true" />
 
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
     </application>
 
 </manifest>
