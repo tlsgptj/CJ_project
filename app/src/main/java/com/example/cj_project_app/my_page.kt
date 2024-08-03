@@ -79,7 +79,8 @@ class my_page : AppCompatActivity() {
             Toast.makeText(this, "홈 클릭됨", Toast.LENGTH_SHORT).show()
         }
         chartPicButton.setOnClickListener {
-            Toast.makeText(this, "차트 클릭됨", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, search_Activity::class.java)
+            startActivity(intent)
         }
         myPageGoButton.setOnClickListener {
             Toast.makeText(this, "내 페이지 클릭됨", Toast.LENGTH_SHORT).show()

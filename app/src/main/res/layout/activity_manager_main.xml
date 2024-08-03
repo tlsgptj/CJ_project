@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="#F5F5F5"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".manager_main_activity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/group5"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="140dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="관리자 화면"
+        android:textColor="@color/black"
+        android:layout_marginLeft="170dp"
+        android:layout_marginTop="100dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="주의 집중 근무자 명단"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="60dp"
+        android:textColor="@color/black"
+        android:textSize="17dp"/>
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/alarm"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="150dp"/>
+
+    <ImageView
+        android:id="@+id/getRed"
+        android:layout_width="350dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginLeft="25dp"
+        android:src="@drawable/rectangular"/>
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/arrow"
+        android:layout_marginLeft="310dp"
+        android:layout_marginTop="205dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="근무자"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:layout_marginTop="185dp"
+        android:layout_marginLeft="60dp"/>
+
+    <TextView
+        android:id="@+id/heartbeatIrregular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="심장 박동수가 불규칙합니다."
+        android:textColor="@color/black"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="217dp"/>
+
+    <TextView
+        android:id="@+id/isEmergency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:text="위급 상황이 발생하였습니다."
+        android:textColor="@color/black"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="217dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="근무자 평균 심장 박동수"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="50dp"/>
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/heart"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="255dp"/>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/avgHeartRate"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="280dp"
+        android:layout_marginLeft="50dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="알림 보내기"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="440dp"
+        android:textSize="18dp"
+        android:textColor="@color/black"/>
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/send"
+        android:layout_marginTop="445dp"
+        android:layout_marginLeft="20dp"/>
+
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="알림"
+        android:layout_marginTop="430dp"
+        android:textSize="8dp"
+        android:layout_marginLeft="250dp"/>
+
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="경고"
+        android:layout_marginTop="430dp"
+        android:textSize="8dp"
+        android:layout_marginLeft="340dp"/>
+
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="주의"
+        android:layout_marginTop="430dp"
+        android:textSize="8dp"
+        android:layout_marginLeft="295dp"/>
+
+    <ImageView
+        android:layout_width="380dp"
+        android:layout_height="120dp"
+        android:src="@drawable/rectangular"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="480dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="신고내역"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="610dp"
+        android:layout_marginLeft="50dp"/>
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/call"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="615dp"/>
+
+    <ImageView
+        android:layout_width="380dp"
+        android:layout_height="120dp"
+        android:src="@drawable/rectangular"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="645dp"/>
+
+    <Button
+        android:id="@+id/home"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/home"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="825dp"/>
+
+    <Button
+        android:id="@+id/chartPic"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/chartpic"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="825dp"/>
+
+    <Button
+        android:id="@+id/my_page_go"
+        android:layout_width="35dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="825dp"
+        android:layout_marginLeft="300dp"
+        android:background="@drawable/people"/>
+
+
+
+
+
+
+
+
+
+
+</FrameLayout>
